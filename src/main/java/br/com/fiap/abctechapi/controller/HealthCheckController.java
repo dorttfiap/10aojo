@@ -30,6 +30,6 @@ public class HealthCheckController {
 
     @GetMapping("version")
     public ResponseEntity<String> version() throws IOException {
-        return ResponseEntity.ok(component.getName());
+        return ResponseEntity.ok(component.getNameVersion());
     }
 }
