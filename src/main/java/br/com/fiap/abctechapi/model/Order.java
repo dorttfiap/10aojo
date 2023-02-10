@@ -3,7 +3,6 @@ package br.com.fiap.abctechapi.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +20,9 @@ public class Order {
     private Long operatorId;
 
     @ManyToMany
+    @JoinTable(name = "orders_services"
+              , foreignKey = @ForeignKey(name = "FK_order_id")
+              , inverseForeignKey = @ForeignKey(name = "FK_services_id"))
     private List<Assist> services;
 
     @OneToOne(cascade = CascadeType.PERSIST)
