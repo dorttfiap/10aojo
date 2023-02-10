@@ -4,6 +4,6 @@ import br.com.fiap.abctechapi.application.dto.OrderDto;
 
 public interface OrderApplication {
 
-    void createOrder(OrderDto orderDto);
+    void createOrder(OrderDto orderDto) throws Exception;
 
 }
