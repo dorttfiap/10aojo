@@ -1,5 +1,6 @@
 package br.com.fiap.abctechapi.handler;
 
+import br.com.fiap.abctechapi.handler.exception.CoordinatesException;
 import br.com.fiap.abctechapi.handler.exception.MaxAssistsException;
 import br.com.fiap.abctechapi.handler.exception.MinimumAssistsException;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,18 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(MaxAssistsException.class)
     public ResponseEntity<ErrorMessageResponse> errorMinAssistRequired(MaxAssistsException exception) {
+        ErrorMessageResponse error = new ErrorMessageResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                new Date(),
+                exception.getMessage(),
+                exception.getDescription()
+        );
+
+        return new ResponseEntity<ErrorMessageResponse>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CoordinatesException.class)
+    public ResponseEntity<ErrorMessageResponse> errorCoordinatesValidation(CoordinatesException exception) {
         ErrorMessageResponse error = new ErrorMessageResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 new Date(),
